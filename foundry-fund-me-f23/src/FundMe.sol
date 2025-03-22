@@ -13,8 +13,6 @@ contract FundMe {
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] private s_funders;
     AggregatorV3Interface private s_priceFeed;
-
-    // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ i_owner;
     uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
 
@@ -79,17 +77,7 @@ function getPriceFeed() public view returns (AggregatorV3Interface) {
     return s_priceFeed;
 
 }
-    // Explainer from: https://solidity-by-example.org/fallback/
-    // Ether is sent to contract
-    //      is msg.data empty?
-    //          /   \
-    //         yes  no
-    //         /     \
-    //    receive()?  fallback()
-    //     /   \
-    //   yes   no
-    //  /        \
-    //receive()  fallback()
+  
 
     fallback() external payable {
         fund();
@@ -100,11 +88,4 @@ function getPriceFeed() public view returns (AggregatorV3Interface) {
     }
 }
 
-// Concepts we didn't cover yet (will cover in later sections)
-// 1. Enum
-// 2. Events
-// 3. Try / Catch
-// 4. Function Selector
-// 5. abi.encode / decode
-// 6. Hash with keccak256
-// 7. Yul / Assembly
+
